@@ -1,18 +1,18 @@
 class LuckyNumbersCounter:
 
     def count_lucky_numbers_with_formula(self, digit_count: str) -> str:
-        """ Counts all combinations where sum(first_half_numbers) == sum(second_half_numbers)
+        """ Returns number of all combinations where sum(first_half_numbers) == sum(second_half_numbers)
 
         Solution from http://www.ega-math.narod.ru/Quant/Tickets.htm#A2.
         """
         N = int(digit_count)
-        tickets = 0
+        result = 0
         for i in range(0, N * 9 + 1):
-            n = self.count_N(N, i)
-            tickets += n * n
-        return str(tickets)
+            n = self._count_N(N, i)
+            result += n * n
+        return str(result)
 
-    def count_N(self, digit_number: int, digit: int) -> int:
+    def _count_N(self, digit_number: int, digit: int) -> int:
         if digit_number == 1:
             if 0 <= digit < 10:
                 return 1
@@ -21,7 +21,7 @@ class LuckyNumbersCounter:
 
         sum = 0
         for number in range(10):
-            sum += self.count_N(digit_number - 1, digit - number)
+            sum += self._count_N(digit_number - 1, digit - number)
         return sum
 
     def count_lucky_numbers_with_recursion(self, digit_count: str) -> str:
