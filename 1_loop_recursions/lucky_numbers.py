@@ -24,6 +24,27 @@ class LuckyNumbersCounter:
             sum += self.count_N(digit_number - 1, digit - number)
         return sum
 
+    def count_lucky_numbers_with_recursion(self, digit_count: str) -> str:
+        """ Returns number of all 'lucky' combinations for number with digit_count
+
+        Repeated code from lesson to compare running time for function with formula and with recursion
+        """
+        self.result = 0
+        self._recursion(int(digit_count))
+        return str(self.result)
+
+    def _recursion(self, level: int,  previous_index1: int = 0, previous_index2: int = 0):
+        if level == 1:
+            for index1 in range(10):
+                for index2 in range(10):
+                    if previous_index1+index1 == previous_index2+index2:
+                        self.result += 1
+            return
+        else:
+            for index1 in range(10):
+                for index2 in range(10):
+                    self._recursion(level-1, previous_index1+index1, previous_index2+index2)
+            return
 
 if __name__ == '__main__':
     pass
