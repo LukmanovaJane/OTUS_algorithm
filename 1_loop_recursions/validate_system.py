@@ -41,7 +41,11 @@ class ValidateSystem:
 
             # run given function with task from task_file
             start = datetime.now()
-            function_result = function(task)
+            try:
+                function_result = function(task)
+            except Exception as e:
+                print(f"Occurs exception during test '{function.__name__}' with task '{task}' from '{task_file.name}'\n{e}")
+                function_result = "Error"
             stop = datetime.now()
 
             # search answer_file as task_file name
